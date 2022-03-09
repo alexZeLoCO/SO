@@ -21,7 +21,7 @@ done
 
 echo -e "\nfor i in '$ @'"
 
-for i in "$@"
+for i in "$@"	# Equivalente a <for i> (Bucle 1 de este fichero)
 do
 	echo -ne "$i\t"
 done
@@ -32,5 +32,11 @@ do
 	echo -ne "$i\t"
 done
 
+echo -e "\n for i in $ lista"
+lista='a b c d'
+for i in $lista
+do
+	echo -ne "$i "
+done
 echo
 #fin shell-script

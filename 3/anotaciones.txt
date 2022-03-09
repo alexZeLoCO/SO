@@ -1,0 +1,17 @@
+shift 		--> 	Mueve todos los argumentos una posición hacia atrás.
+
+continue	-->	Vuelve al inicio del bucle de la siguiente iteración.
+break		--> 	Finaliza el bucle.
+
+>/dev/null	--> 	Salida silenciosa. Aquello que retorne el comado que se pone antes de '>' no se mostrará por pantalla, se ocultará.
+
+ej12_if_comando:
+if getent passwd | grep alex	# Se comprueba si existe alex en passwd. Se retorna 0 sí existe.
+then
+	echo "El usuario alex PERTENECE al sistema"
+else
+	echo "El usuario alex NO PERTENECE al sistema"
+fi
+
+read		-->	Contrario a 'echo'. Recibe información de la entrada estándar (teclado) hasta el primer retorno de carro.	||	read <var>
+			Nota: Si se cambia la entrada estándar. Se cambia de donde recibe read.
