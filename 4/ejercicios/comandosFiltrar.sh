@@ -13,6 +13,8 @@ then
 	exit 1
 fi
 
+echo "Los comandos que están consumiendo entre $1 y $2 bytes de memoria son:"
+
 # 1. Convertir en tipo csv
 # 2. Coger líneas a partir de la segunda 
 # 3. Iterar

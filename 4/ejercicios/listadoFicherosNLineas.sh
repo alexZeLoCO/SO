@@ -8,14 +8,15 @@ then
 fi
 
 for archivo in "$1"/*
+do
 	if test -d "$archivo"
 	then
-		"$0" "$archivo" $2
+		"$0" "$archivo" "$2"
 	else
 		n_lin=$(cat "$archivo" | wc -l)
-		if test $n_lin -gt $
+		if test "$n_lin" -gt "$2"
 		then
-			echo $archivo
+			echo "$archivo"
 		fi
 	fi
 done

@@ -14,7 +14,7 @@ do
 	apellidos=$(echo $linea | cut -d ";" -f 2)
 	nombre=$(echo $linea | cut -d ";" -f 3)
 	gid=$(echo $linea | cut -d ";" -f 4)
-	echo "$username:x:$uid:$gid:$apellidos:$nombre:/home$username:/bin/bash" >> passwd
+	echo "$username:x:$uid:$gid:$apellidos:$nombre:/home$username:/bin/bash" >> ./passwd_copia
 	uid=$(($uid + 1))
 done
 exit 0
