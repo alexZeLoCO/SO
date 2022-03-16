@@ -6,7 +6,7 @@ then
 	exit 1
 fi
 
-if getent passwd | grep "^$2:.*"> /dev/null
+if getent passwd | grep "^$1:.*"> /dev/null
 then
 	echo "El usuario ya existe" >&2
 	exit 1
