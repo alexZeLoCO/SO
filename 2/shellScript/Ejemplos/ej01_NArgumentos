@@ -1,5 +1,0 @@
-#!/bin/sh
-
-# Este shell script muestra el uso de $#
-
-echo "Has introducido $# argumentos"
