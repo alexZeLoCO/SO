@@ -1,0 +1,38 @@
+Usuario propietario = Usuario Real	
+	Usuario que ejecuta el proceso.
+	No es el propietario del fichero.
+Usuario efectivo
+	Los privilegios del proceso son los mismos que los del usuario efectivo.
+
+Grupo propietario
+	Grupo que ejecuta el proceso.
+	No es el grupo propietario del fichero.
+Grupo efectivo
+	Los privilegios del proceso son los mismos que los del usuario efectivo.
+
+
+En la mayoria de casos, el usuario propietario es el efectivo y el grupo propietario es tambien el efectivo.
+
+$ chmod u+S ~~> Cuando se ejecute el proceso, el usuario efectivo sera el que creo el fichero.
+$ chmod g+S ~~> Cuando se ejecute el proceso, el grupo efectivo sera el que creo el fichero.
+// No se puede hacer chmod o+S ya que no hay 'otros' efectivos.
+
+Por lo tanto, permite al usuario que lo ejecuta (propietario) realizar acciones escritas en el fichero para las que no tiene permiso, pero serian permitidas porque el usuario efectivo si lo tiene.
+
+---
+Un proceso tiene maximos privilegios cuando su usuario efectivo es el 0 (root)
+
+---
+
+A crea el fichero
+B ejecuta el fichero
+UDI_Efectivo	UID_Propietario	UID_Guardado
+A		B
+	setuid(B);	// Si el uid coincide con el Propietario se cambia
+B		B		A
+	setuid(A);	// Si el uid coincide con el Guardado se cambia
+A		B		A
+
+setgid(gid); // Funciona de forma analoga a seguid(uid);
+
+setuid(uid) y setgid(gid) funcionan solo si esta activo el bit S de u y g respectivamente.
