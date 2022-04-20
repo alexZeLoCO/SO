@@ -1,0 +1,30 @@
+Un proceso se crea desde otro usando la llamada al sistema fork().
+fork() retorna 2 veces, una para el padre y otra para el hijo.
+	--> fork() crea una copia identica de todo el proceso padre. (codigo, datos y pila).
+	--> Por lo tanto, fork() retornara en el padre y en el hijo, habiendose llamado una sola vez.
+	--> Si el padre tiene acceso a un fichero, el hijo también lo va a tener.
+	--> El PC se copia, por lo tanto el hijo ejecuta a partir de la orden fork, la misma instruccion que el padre.
+	--> Retorna en el padre: El PID del hijo o un -1 si hubo un error.
+			el hijo: Un 0 siempre.
+
+	if (fork() == 0) {
+		// Codigo hijo
+	} else {
+		// Codigo padre
+	}
+
+exec() cambia el programa que esta ejecutando el proceso que lo llama.
+	--> Nunca retorna si tiene exito
+	--> Fase de vaciado: elimina de la memoria los datos, el codigo y la pila del proceso
+	--> Fase de carga: carga en la memoria los datos, el codigo y la pila del nuevo programa a ejecutar.
+
+	--> exec<letra>
+		--> l - lista,  (path, arg0, arg1, arg2, ..., argN)
+				("/bin/ls", "ls", "-l", "/etc", NULL);
+							  NULL indica el fin de los parametros.
+		--> v - vector, (path, argv[])
+				("/bin/ls", ["ls", "-l", "/etc", NULL]);
+		--> e - se cambia alguna variable del entorno del proceso (no lo utilizamos)
+		--> p - el ejecutable se busca en el directorio actual y en los indicados por PATH (variable del entorno)
+				execlp("ls", "ls", "-l", "/etc", NULL);
+				execvp("ls", ["ls", "-l", "/etc", NULL]);
