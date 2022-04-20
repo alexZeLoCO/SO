@@ -1,0 +1,18 @@
+wait (int * status) // Espera a cualquier terminacion de hijo
+waitpid (pid_t pid, int * status, int options) // Espera a que el hijo con pid pid termine
+	--> waitpid (-1, &status, 0) = wait (&status) // -1 espera a cualquier pid
+	--> waitpid (-1, &status, WNOHANG) // Hace ping constantemente al hijo (0 si no termino -1, pid si termino).
+		--> while (waitpid(-1, &s, WNOHANG) == 0) {
+			echo "Hijo vivo";
+		    }
+
+			echo "Hijo terminado";
+/////////////////////////
+Combinaciones de terminacion
+1) Hijo termina antes que el padre, se elimina el hijo de memoria excepto su PCB, cuando el padre haga un wait se termina el hijo por completo.
+2) Padre termina antes que el hijo, su padre pasa a ser init, que al hacer wait() constantemente, hace que nunca se considere al hijo zombie. En cuanto termina el hijo se termina por completo.
+/////////////////////////
+  WIFEXITED(status): Devuelve true si el hijo termino normalmente. Termino por algo no contemplado en el codigo. Si el programador ha contemplado excepciones, y el programa termina por una de ellas, se considera terminacion normal.
+WEXITSTATUS(status): Devuelve el codigo de terminacion del hijo.
+WIFSIGNALED(status): Devuelve true si el hijo termino por una sennal que no tenia manejador.
+WTERMSIG(status): Devuelve el codigo de sennal que termino al hijo.
