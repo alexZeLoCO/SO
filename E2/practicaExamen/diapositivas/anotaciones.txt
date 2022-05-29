@@ -1,0 +1,37 @@
+Proceso:
+	PID y PPID (PID del padre)
+	Entorno del proceso
+
+Procesos especiales: 
+	swapper (PID 0) // No creo que pregunten
+	init	(PID 1)	--> El primero que se crea. El resto de procesos salen de este.		// Si creo que cae
+			    Si el padre de un proceso se termina (huerfano). El nuevo padre del proceso pasa a ser init.
+
+Si un proceso (PID 1234) crea otro proceso, el PPID del proceso hijo (el nuevo) va a ser el del padre (1234)
+
+/// --- ///
+
+Propietarios:	Usuario --> Crea el proceso
+		Grupo   --> Crea el proceso
+
+Efectivo:	Usuario --> El proceso se ejecuta con los privilegios de este usuario
+		Grupo   --> El proceso se ejecuta con los privilegios de este grupo 
+
+actualizador.sh
+	# para actualiar: sudo pacman -Syyuu
+	#                 sudo apt-get update
+
+	sudo pacman -Syyuu	
+
+UID 	Propietario	Efectivo	Guardado
+	1		1		-
+	1		1		-		setuid(2) --> Err
+
+	1		2		-
+	1		1		2		setuid(1)
+	1		2		1		setuid(2)
+	1		2		1		setuid(0) --> Err
+
+	1		0		-
+	1		1		1		setuid(1)
+							setuid(0) --> Err
